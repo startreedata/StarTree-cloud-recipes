@@ -5,7 +5,7 @@ executionFrameworkSpec:
   segmentUriPushJobRunnerClassName: 'org.apache.pinot.plugin.ingestion.batch.standalone.SegmentUriPushJobRunner'
 jobType: SegmentCreationAndTarPush
 
-inputDirURI: '${PWD}/data'
+inputDirURI: '${DATA}'
 includeFileNamePattern: 'glob:**/*.csv'
 outputDirURI: 'segments'
 overwriteOutput: true

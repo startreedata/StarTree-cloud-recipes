@@ -1,3 +1,4 @@
+include ../Makefile
 include ../.env
 
 list:
@@ -42,15 +43,28 @@ table:
 		| jq
 
 upload:
-	pinot-admin \
-		LaunchDataIngestionJob \
-		-jobSpecFile ${PWD}/config/ingestionJobSpec.yaml \
-		-authToken " Bearer ${ST_TOKEN}" \
-		-values ST_WORKSPACE=${ST_WORKSPACE} \
-		-values ST_CONTROLLER=${ST_CONTROLLER} \
-		-values PWD=${PWD}
+	docker run \
+		-v ${PWD}:/tmp/work/ \
+		apachepinot/pinot:1.1.0 \
+			LaunchDataIngestionJob \
+			-jobSpecFile /tmp/work/config/ingestionJobSpec.yaml \
+			-authToken " Bearer ${ST_TOKEN}" \
+			-values ST_WORKSPACE=${ST_WORKSPACE} \
+			-values ST_CONTROLLER=${ST_CONTROLLER} \
+			-values DATA=/tmp/work/data/
 
 recipe: table upload
+
+app: helper
+	docker run \
+		-v ${PWD}:/tmp/work \
+		-e ST_WORKSPACE=${ST_WORKSPACE} \
+		-e ST_CONTROLLER=${ST_CONTROLLER} \
+		-e ST_TOKEN=${ST_TOKEN} \
+		-e ST_BROKER=${ST_BROKER} \
+		-p 8501:8501 \
+		startree/insterstellar \
+			streamlit run /tmp/work/app.py --server.port=8501 --server.address=0.0.0.0
 
 clean:
 	rm -rf segments/*
