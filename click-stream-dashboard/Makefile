@@ -63,8 +63,10 @@ app: helper
 		-e ST_TOKEN=${ST_TOKEN} \
 		-e ST_BROKER=${ST_BROKER} \
 		-p 8501:8501 \
+		--name app \
 		startree/insterstellar \
 			streamlit run /tmp/work/app.py --server.port=8501 --server.address=0.0.0.0
 
 clean:
-	rm -rf segments/*
+	docker kill app
+	

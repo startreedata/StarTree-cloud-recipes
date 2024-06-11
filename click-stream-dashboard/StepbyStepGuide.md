@@ -29,9 +29,9 @@ Apache Pinot, a real-time OLAP data store, will be employed to capture and analy
 ### Sample Data
 - Sample data can be found [here](data/clickstream_sample.csv)
 
-### Create .env file`
+### Create .env file
 
-1. Create a `.env` file with the properties above.
+1. Create a `.env` file in the parent directory with the properties in this [example](#for-example) below.
 2. Create a token in StarTree's Interstellar cluster by going to [this](https://apps.celpxu.cp.s7e.startree.cloud/pinot-api-tokens) page and saving in the `.env` file. 
 3. Obtain your workspace id from the top of the Interstellar web application and set it in the `.env` file.
 4. Run the following command below to create a schema and table in Interstellar called `clickstream`.
@@ -63,22 +63,10 @@ make upload
 
 ## Steps to Install Streamlit on Laptop
 
-The Streamlit application will leverage the `.env` file you created to access authorization information.
-
-1. Create a Python environment by running these commands.
+The Streamlit application will leverage the `.env` file you created to access authorization information. Run the command below to start the streamlit application via Docker.
 
 ```bash
-python -m venv .venv
-source .venv/bin/activate
+make app
 ```
 
-2. Install the Python modules needed to run the Streamlit app.
-
-```bash
-pip install -r requirements.txt
-```
-
-3. Run the Streamlit app.
-
-The Streamlit app should automatically open a tab in your browser to http://localhost:8501/.
-
+Open your browser to http://localhost:8501/.
