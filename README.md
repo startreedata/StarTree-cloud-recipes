@@ -4,7 +4,7 @@ This repository contains recipes intended to be used with Startree's free-foreve
 
 ## Create .env file
 
-1. Create a `.env` file in the parent directory with the properties in this [example](#for-example) below.
+1. Create a `.env` file in the parent directory with the properties in this [example](#sample-env-file) below.
 2. Create a token in StarTree's Interstellar cluster by going to [this](https://apps.celpxu.cp.s7e.startree.cloud/pinot-api-tokens) page and saving in the `.env` file. 
 3. Obtain your workspace id from the top of the Interstellar web application and set it in the `.env` file.
 
