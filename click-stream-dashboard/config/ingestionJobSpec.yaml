@@ -22,12 +22,12 @@ recordReaderSpec:
     delimiter: ','
 
 tableSpec:
-  tableName: '${ST_WORKSPACE}.clickstream'
-  schemaURI: '${ST_CONTROLLER}/tables/${ST_WORKSPACE}.clickstream/schema'
-  tableConfigURI: '${ST_CONTROLLER}/tables/${ST_WORKSPACE}.clickstream'
+  tableName: '${PINOT_WORKSPACE}.clickstream'
+  schemaURI: '${PINOT_CONTROLLER}/tables/${PINOT_WORKSPACE}.clickstream/schema'
+  tableConfigURI: '${PINOT_CONTROLLER}/tables/${PINOT_WORKSPACE}.clickstream'
 
 pinotClusterSpecs:
-    - controllerURI: '${ST_CONTROLLER}'
+    - controllerURI: '${PINOT_CONTROLLER}'
 
 pushJobSpec:
   pushAttempts: 2

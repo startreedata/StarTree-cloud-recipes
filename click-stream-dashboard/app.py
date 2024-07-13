@@ -8,9 +8,9 @@ from dotenv import load_dotenv
 load_dotenv()
 
 # StarTree Cloud Broker URL and Bearer Auth Token
-PINOT_BROKER_URL = f'{os.getenv("ST_BROKER")}/query/sql'
-BEARER_AUTH_TOKEN = f'Bearer {os.getenv("ST_TOKEN")}'
-DATABASE = os.getenv('ST_WORKSPACE')
+PINOT_BROKER_URL = f'{os.getenv("PINOT_BROKER")}/query/sql'
+BEARER_AUTH_TOKEN = f'Bearer {os.getenv("PINOT_TOKEN")}'
+DATABASE = os.getenv('PINOT_WORKSPACE')
 
 # Function to query StarTree Cloud Pinot
 def query_pinot(query):

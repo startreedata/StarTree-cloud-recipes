@@ -2,43 +2,49 @@ include ../Makefile
 include ../.env
 
 list:
-	@curl ${ST_CONTROLLER}/schemas \
+	@curl ${PINOT_CONTROLLER}/schemas \
 		-H "Accept: application/json" \
-		-H "Authorization: Bearer ${ST_TOKEN}" \
-		-H "Database: ${ST_WORKSPACE}" \
+		-H "Authorization: Bearer ${PINOT_TOKEN}" \
+		-H "Database: ${PINOT_WORKSPACE}" \
 		| jq
 
-	@curl ${ST_CONTROLLER}/tables \
+	@curl ${PINOT_CONTROLLER}/tables \
 		-H "Accept: application/json" \
-		-H "Authorization: Bearer ${ST_TOKEN}" \
-		-H "Database: ${ST_WORKSPACE}" \
+		-H "Authorization: Bearer ${PINOT_TOKEN}" \
+		-H "Database: ${PINOT_WORKSPACE}" \
 		| jq
 
-	@curl ${ST_CONTROLLER}/tables/clickstream/schema \
+	@curl ${PINOT_CONTROLLER}/tables/clickstream/schema \
 		-H "Accept: application/json" \
-		-H "Authorization: Bearer ${ST_TOKEN}" \
-		-H "Database: ${ST_WORKSPACE}" \
+		-H "Authorization: Bearer ${PINOT_TOKEN}" \
+		-H "Database: ${PINOT_WORKSPACE}" \
 		| jq
 
-	@curl ${ST_CONTROLLER}/tables/${ST_WORKSPACE}.clickstream/schema \
+	@curl ${PINOT_CONTROLLER}/tables/${PINOT_WORKSPACE}.clickstream/schema \
 		-H "Accept: application/json" \
-		-H "Authorization: Bearer ${ST_TOKEN}" \
+		-H "Authorization: Bearer ${PINOT_TOKEN}" \
+		| jq
+
+	@curl ${PINOT_CONTROLLER}/tables/test1 \
+		-H "Accept: application/json" \
+		-H "Authorization: Bearer ${PINOT_TOKEN}" \
+		-H "Database: ${PINOT_WORKSPACE}" \
 		| jq
 
 table:
-	@curl -X POST ${ST_CONTROLLER}/schemas \
+	@curl -X POST ${PINOT_CONTROLLER}/schemas \
 		-H "Accept: application/json" \
 		-H "Content-Type: application/json" \
-		-H "Authorization: Bearer ${ST_TOKEN}" \
-		-H "Database: ${ST_WORKSPACE}" \
+		-H "Authorization: Bearer ${PINOT_TOKEN}" \
+		-H "Database: ${PINOT_WORKSPACE}" \
 		-d @config/schema.json \
 		| jq
 
-	@curl -X  POST ${ST_CONTROLLER}/tables \
+	@curl -X  POST ${PINOT_CONTROLLER}/tables \
 		-H "Accept: application/json" \
 		-H "Content-Type: application/json" \
-		-H "Authorization: Bearer ${ST_TOKEN}" \
-		-H "Database: ${ST_WORKSPACE}" \
+		-H "Authorization: Bearer ${PINOT_TOKEN}" \
+		-H "Database: ${PINOT_WORKSPACE}" \
 		-d @config/table.json \
 		| jq
 
@@ -48,9 +54,9 @@ upload:
 		apachepinot/pinot:1.1.0 \
 			LaunchDataIngestionJob \
 			-jobSpecFile /tmp/work/config/ingestionJobSpec.yaml \
-			-authToken " Bearer ${ST_TOKEN}" \
-			-values ST_WORKSPACE=${ST_WORKSPACE} \
-			-values ST_CONTROLLER=${ST_CONTROLLER} \
+			-authToken " Bearer ${PINOT_TOKEN}" \
+			-values PINOT_WORKSPACE=${PINOT_WORKSPACE} \
+			-values PINOT_CONTROLLER=${PINOT_CONTROLLER} \
 			-values DATA=/tmp/work/data/
 
 recipe: table upload
@@ -58,10 +64,10 @@ recipe: table upload
 app: helper
 	docker run \
 		-v ${PWD}:/tmp/work \
-		-e ST_WORKSPACE=${ST_WORKSPACE} \
-		-e ST_CONTROLLER=${ST_CONTROLLER} \
-		-e ST_TOKEN=${ST_TOKEN} \
-		-e ST_BROKER=${ST_BROKER} \
+		-e PINOT_WORKSPACE=${PINOT_WORKSPACE} \
+		-e PINOT_CONTROLLER=${PINOT_CONTROLLER} \
+		-e PINOT_TOKEN=${PINOT_TOKEN} \
+		-e PINOT_BROKER=${PINOT_BROKER} \
 		-p 8501:8501 \
 		--name app \
 		startree/insterstellar \

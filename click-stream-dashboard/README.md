@@ -48,10 +48,10 @@ The controller url will be the same as the broker url without the `broker.` subd
 
 #### For example:
 ```
-ST_TOKEN=st-your-token
-ST_WORKSPACE=ws_yourworkspace
-ST_BROKER=https://broker.pinot.xxxxxxxx.startree.cloud:443
-ST_CONTROLLER=https://pinot.xxxxxxxx.startree.cloud:443
+PINOT_TOKEN=st-your-token
+PINOT_WORKSPACE=ws_yourworkspace
+PINOT_BROKER=https://broker.pinot.xxxxxxxx.startree.cloud:443
+PINOT_CONTROLLER=https://pinot.xxxxxxxx.startree.cloud:443
 ```
 
 ### Upload Data
