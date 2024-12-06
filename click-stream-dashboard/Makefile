@@ -67,7 +67,7 @@ app: helper
 		-e PINOT_WORKSPACE=${ST_WORKSPACE} \
 		-e PINOT_CONTROLLER=${PINOT_CONTROLLER} \
 		-e PINOT_TOKEN=${ST_TOKEN} \
-		-e PINOT_BROKER=${ST_BROKER} \
+		-e PINOT_BROKER=${_BROKER} \
 		-p 8501:8501 \
 		--name app \
 		startree/insterstellar \
