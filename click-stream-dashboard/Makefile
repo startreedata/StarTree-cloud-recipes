@@ -65,9 +65,9 @@ app: helper
 	docker run \
 		-v ${PWD}:/tmp/work \
 		-e PINOT_WORKSPACE=${ST_WORKSPACE} \
-		-e PINOT_CONTROLLER=${PINOT_CONTROLLER} \
+		-e PINOT_CONTROLLER=${ST_CONTROLLER} \
 		-e PINOT_TOKEN=${ST_TOKEN} \
-		-e PINOT_BROKER=${_BROKER} \
+		-e PINOT_BROKER=${ST_BROKER} \
 		-p 8501:8501 \
 		--name app \
 		startree/insterstellar \
